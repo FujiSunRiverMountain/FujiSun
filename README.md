@@ -1,0 +1,2 @@
+# FujiSun
+for AWS practice
