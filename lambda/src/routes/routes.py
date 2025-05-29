@@ -10,4 +10,4 @@ def post_personal_info(information: PersonalInfo):
 
 @router.get("/personal_info")
 def get_personal_info():
-  return get_information()
+  return get_information('test123')

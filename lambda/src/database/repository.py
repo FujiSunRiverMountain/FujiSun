@@ -1,27 +1,35 @@
-# from .db import dynamodb
-# from botocore.exceptions import ClientError
+from .db import dynamodb
+from botocore.exceptions import ClientError
 from fastapi.responses import JSONResponse
-# from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key
 
-# table = dynamodb.Table("PersonalInfo")
+table = dynamodb.Table("personalInfoTest")
 
-def create_and_update_information(information: dict):
-  return JSONResponse(content=information)
-  # try:
-  #   table.put_item(Item=information)
-  #   return information
+def create_and_update_information(personalInfo: dict):
+  try:
+        response = table.update_item(
+            Key={"userId": personalInfo.get("user_id")},
+            UpdateExpression="SET information = :info",
+            ExpressionAttributeValues={":info": personalInfo.get("information")},
+            ReturnValues="UPDATED_NEW"
+        )
+        return {"information": response["Attributes"]["information"]}
   
-  # except ClientError as e:
-  #   return JSONResponse(content=e.response["error"], status_code=500)
+  except ClientError as e:
+    return JSONResponse(
+        content={"error": str(e), "details": e.response.get("Error", {})},
+        status_code=500
+      )
 
 
-def get_information():
-  return JSONResponse(content={"information": "ユーザーID"})
-  # try:
-  #   response = table.get_item(Key=user_id)
+def get_information(user_id: str):
+  try:
+    response = table.get_item(Key={"userId": user_id})
+    return response["Item"]
 
-  #   return response["Items"]
-
-  # except ClientError as e:
-  #   return JSONResponse(content=e.response["error"], status_code=500)
+  except ClientError as e:
+    return JSONResponse(
+        content={"error": str(e), "details": e.response.get("Error", {})},
+        status_code=500
+      )
   
