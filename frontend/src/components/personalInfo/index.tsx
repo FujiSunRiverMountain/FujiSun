@@ -1,14 +1,27 @@
 import { Container, Box, TextField, Button, Typography, Paper } from '@mui/material';
 import axios from "axios";
+import { useState } from 'react';
 
 export const PersonalInfo = () => {
+  const [info, setInfo] = useState('')
   const api = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/personal_info';
+  axios.get(api, {
+    headers: {
+      token: ''
+    },
+  }).then(res => {
+    setInfo(res.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const information = e.target.info.value;
+    e.preventDefault();;
     axios.post(api, {
-      user_id: 'test123',
-      information 
+      headers: {
+        token: ''
+      },
+      info 
     }).then(function (response) {
       console.log(response);
     })
@@ -31,10 +44,12 @@ export const PersonalInfo = () => {
             id="info"
             name="info"
             label="自己情報"
+            defaultValue={info}
             variant="outlined"
             margin="normal"
             multiline
             rows={20}
+            onChange={(e) => setInfo(e.target.value)}
           />
           <Button
             type="submit"
