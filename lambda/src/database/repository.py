@@ -7,13 +7,13 @@ table = dynamodb.Table("personalInfoTest")
 
 def create_and_update_information(personalInfo: dict):
   try:
-        response = table.update_item(
-            Key={"userId": personalInfo.get("user_id")},
-            UpdateExpression="SET information = :info",
-            ExpressionAttributeValues={":info": personalInfo.get("information")},
-            ReturnValues="UPDATED_NEW"
-        )
-        return {"information": response["Attributes"]["information"]}
+    response = table.update_item(
+      Key={"userId": personalInfo.get("user_id")},
+      UpdateExpression="SET information = :info",
+      ExpressionAttributeValues={":info": personalInfo.get("information")},
+      ReturnValues="UPDATED_NEW"
+    )
+    return {"information": response["Attributes"]["information"]}
   
   except ClientError as e:
     return JSONResponse(
