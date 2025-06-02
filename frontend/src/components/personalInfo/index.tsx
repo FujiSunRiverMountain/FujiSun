@@ -1,25 +1,29 @@
 import { Container, Box, TextField, Button, Typography, Paper } from '@mui/material';
 import axios from "axios";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { tokenUseStore } from '../BaseLayout/zustand';
 
 export const PersonalInfo = () => {
+  const { token } = tokenUseStore();
   const [info, setInfo] = useState('')
   const api = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/personal_info';
-  axios.get(api, {
-    headers: {
-      token: ''
-    },
-  }).then(res => {
-    setInfo(res.data);
+  useEffect(() => {
+    axios.get(api, {
+      headers: {
+        token
+      },
+    }).then(res => {
+      setInfo(res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   })
-  .catch(function (error) {
-    console.log(error);
-  });
   const handleSubmit = (e: any) => {
     e.preventDefault();;
     axios.post(api, {
       headers: {
-        token: ''
+        token
       },
       info 
     }).then(function (response) {
