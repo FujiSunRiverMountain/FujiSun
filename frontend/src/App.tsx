@@ -1,15 +1,17 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
+import { useEffect } from 'react';
 import { tokenUseStore } from './components/BaseLayout/zustand';
 import AppRouter from './router/'
 import { useAuth } from "react-oidc-context";
 
 function App() {
-
   const auth = useAuth();
   const { updateToken } = tokenUseStore();
+
+  useEffect(() => {
+    if (auth.isAuthenticated && auth.user?.id_token) {
+      updateToken(auth.user.id_token);
+    }
+  }, [auth.isAuthenticated, auth.user]);
 
 
   if (auth.isLoading) {
@@ -21,14 +23,12 @@ function App() {
   }
 
   if (auth.isAuthenticated) {
-    updateToken(auth.user?.id_token!);
     return <AppRouter />;
   }
 
   return (
     <div>
       <button onClick={() => auth.signinRedirect()}>Sign in</button>
-
     </div>
   );
 }
