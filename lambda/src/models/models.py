@@ -1,5 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 class PersonalInfo(BaseModel):
-  user_id: str
   information: str
