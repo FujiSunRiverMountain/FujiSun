@@ -13,7 +13,7 @@ def create_and_update_information(personalInfo: dict, user_id: str):
       ExpressionAttributeValues={":info": personalInfo.get("information")},
       ReturnValues="UPDATED_NEW"
     )
-    return {"information": response["Attributes"]["information"]}
+    return response["Attributes"]["information"]
   
   except ClientError as e:
     return JSONResponse(
@@ -26,7 +26,7 @@ def get_information(user_id: str):
   try:
     response = table.get_item(Key={"userId": user_id})
     information = response.get("Item", {}).get("information")
-    return {"information": information}
+    return information
 
   except ClientError as e:
     return JSONResponse(
