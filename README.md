@@ -34,7 +34,7 @@ cd lambda/package
 
 2. 外部ライブラリダウンロード
 ```
-pip install --target . -r ../../requirements.txt
+pip install --target . -r ../requirements.txt
 ```
 
 3. Prod コードコピー
