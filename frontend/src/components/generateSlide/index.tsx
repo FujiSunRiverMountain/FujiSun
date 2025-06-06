@@ -1,24 +1,12 @@
 import { Container, Box, TextField, Button, Typography, Paper } from '@mui/material';
 import axios from "axios";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { tokenUseStore } from '../BaseLayout/zustand';
 
-export const PersonalInfo = () => {
+export const GeneratoSlide = () => {
   const { token } = tokenUseStore();
   const [information, setInfo] = useState('')
-  const api = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/personal_info';
-  useEffect(() => {
-    axios.get(api, {
-      headers: {
-        token
-      },
-    }).then(res => {
-      setInfo(res.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }, [token])
+  const api = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/generate_slide';
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     axios.post(api, {
@@ -39,7 +27,7 @@ export const PersonalInfo = () => {
     <Container >
       <Paper elevation={3} className='left-0 right-0 h-300 p-20 mt-20 rounded-md'>
         <Typography variant="h5" align="center" gutterBottom>
-          自己情報入力
+        作成したいスライドの要望を教えてください
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate >
           <TextField
@@ -68,3 +56,4 @@ export const PersonalInfo = () => {
     </Container>
   );
 }
+

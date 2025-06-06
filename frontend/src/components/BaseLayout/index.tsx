@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { Outlet } from "react-router-dom";
+import { Header } from "./header";
 
 const BaseLayout = (): ReactElement => {
 
@@ -7,7 +8,8 @@ const BaseLayout = (): ReactElement => {
 
   return (
     <>
-      <div id="base">
+      <Header/>
+      <div id="base" className="fixed top-0 left-0 right-0 bg-white shadow">
         <Outlet />
       </div>
     </>

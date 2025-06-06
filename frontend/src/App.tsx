@@ -11,7 +11,7 @@ function App() {
     if (auth.isAuthenticated && auth.user?.id_token) {
       updateToken(auth.user.id_token);
     }
-  }, [auth.isAuthenticated, auth.user]);
+  }, [auth.isAuthenticated, auth.user, updateToken]);
 
 
   if (auth.isLoading) {

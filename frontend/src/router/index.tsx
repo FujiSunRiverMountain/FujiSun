@@ -7,12 +7,14 @@ import {
 import BaseLayout from '../components/BaseLayout';
 import { LoginPage } from '../components/login';
 import { PersonalInfo } from '../components/personalInfo';
+import { GeneratoSlide } from '../components/generateSlide';
 
 const router = createHashRouter(
   createRoutesFromElements(
     <>
       <Route element={<BaseLayout />}>
         <Route  path="/login" element={ <LoginPage />} />
+        <Route  path="/generate-slide" element={ <GeneratoSlide />} />
         {/* path="/personalInfo" */}
         <Route index element={ <PersonalInfo />} />
       </ Route>,
