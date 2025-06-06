@@ -19,6 +19,7 @@ export const Header = () => {
         <Box className="flex space-x-12 items-center">
           {navItems.map((item) => (
             <button
+            key={item.label}
             onClick={() => navigate(item.path)}
             className="text-white bg-transparent border-none appearance-none focus:outline-none
                        transition-transform duration-300 ease-in-out transform
