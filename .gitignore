@@ -22,6 +22,7 @@ var/
 node_modules/
 venv/
 lambda/package/*
+lambda/lambda_deploy.zip
 *.zip
 .env
 .token
