@@ -3,7 +3,7 @@ from botocore.exceptions import ClientError
 from fastapi.responses import JSONResponse
 from boto3.dynamodb.conditions import Key
 
-table = dynamodb.Table("personalInfoTest")
+table = dynamodb.Table("personalInfo")
 
 def create_and_update_information(personalInfo: dict, user_id: str):
   try:
