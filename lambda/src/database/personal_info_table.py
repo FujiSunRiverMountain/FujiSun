@@ -1,7 +1,6 @@
 from .db import dynamodb
 from botocore.exceptions import ClientError
 from fastapi.responses import JSONResponse
-from boto3.dynamodb.conditions import Key
 
 table = dynamodb.Table("personalInfo")
 
