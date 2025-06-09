@@ -7,10 +7,12 @@ table = dynamodb.Table("storagePPTX")
 def create_pptx_data(storage_id: str, user_id: str, file_name: str):
   try:
     response = table.update_item(
-      Key={"storageId": storage_id},
-      UpdateExpression="SET userId = :userId, fileName = :fileName",
+      Key={
+        "storageId": storage_id,
+        "userId": user_id
+      },
+      UpdateExpression="SET fileName = :fileName",
       ExpressionAttributeValues={
-        ":userId": user_id,
         ":fileName": file_name
       },
       ReturnValues="UPDATED_NEW"
