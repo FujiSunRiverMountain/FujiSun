@@ -15,11 +15,17 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-
+__pycache__
+dynamodb_local_latest
+dynamodb_local_latest.zip
 # Serverless directories
 .serverless
 
 node_modules/
 venv/
 lambda/package/*
+lambda/lambda_deploy.zip
+lambda/src/test.pptx
 *.zip
+.env
+.token
