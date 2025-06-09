@@ -25,24 +25,20 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+5. other lib install
+```
+pip install uvicorn
+pip install python-pptx
+```
+
 # Lambda デプロイ用 ZIP 作成（シェルスクリプト作りたい）
 
 1. ディレクトリ移動
 ```
-cd lambda/package
+cd lambda
 ```
 
-2. 外部ライブラリダウンロード
+2. zip 生成
 ```
-pip install --target . -r ../requirements.txt
-```
-
-3. Prod コードコピー
-```
-cp -r ../src/* .
-```
-
-4. Zip 生成
-```
-zip -r zip_lambda_deploy.zip .
+sh gen_lambda_zip.sh
 ```

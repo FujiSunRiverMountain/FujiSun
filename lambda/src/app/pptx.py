@@ -8,7 +8,6 @@ def generate_slide(presentation_scene: PresentationScene, user_id: str):
   namespace = {"BytesIO": BytesIO}
 
   gemini_response = generate_pptx_code(presentation_scene, user_id)
-  print(gemini_response)
   exec(gemini_response, namespace)
 
   ppt_data = namespace["response"].getvalue()

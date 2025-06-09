@@ -17,6 +17,7 @@ def merge_information(presentation_scene: PresentationScene, information: Person
 {presentation_scene.information}
 
 以下の制約を守ってください：
+- 実行環境は AWS Lambda です。アーキテクチャは arm64 です。ランタイムは Python3.13 です
 - `from pptx` 系などの必要なインポート文もすべて含めてください
 - コードブロック（```python や ```）は一切つけずに、**純粋なPythonコードだけ**を出力してください
 - `BytesIO` は外部でインポート・注入されるため、`from io import BytesIO` は書かないでください

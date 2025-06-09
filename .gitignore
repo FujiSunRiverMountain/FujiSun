@@ -23,6 +23,7 @@ node_modules/
 venv/
 lambda/package/*
 lambda/lambda_deploy.zip
+lambda/src/test.pptx
 *.zip
 .env
 .token
