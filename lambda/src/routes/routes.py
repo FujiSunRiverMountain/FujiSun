@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Header
-from database.repository import create_and_update_information, get_information
-from models.models import PersonalInfo
+from database.personal_info_table import create_and_update_information, get_information
+from app.pptx import generate_slide
+from models.models import PersonalInfo, PresentationScene
 import json
 import base64
 
@@ -20,3 +21,8 @@ def post_personal_info(information: PersonalInfo, token: str = Header(default=''
 def get_personal_info(token: str = Header(default='')):
   user_id = decode_user_id(token)
   return get_information(user_id)
+
+@router.post("/generate_slide")
+def gemini_generate(presentation_scene: PresentationScene, token: str = Header(default='')):
+  user_id = decode_user_id(token)
+  generate_slide(presentation_scene, user_id)
