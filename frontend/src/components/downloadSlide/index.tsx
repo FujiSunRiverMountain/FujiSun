@@ -4,24 +4,28 @@ import { useEffect, useState } from 'react';
 import { tokenUseStore } from '../BaseLayout/zustand';
 import DownloadIcon from '@mui/icons-material/Download';
 
+type StorageInfo = {
+  storage_id: string;
+  file_name: string;
+};
+
 export const DownloadSlide = () => {
   const { token } = tokenUseStore();
-  const [storageInfo, setStorageInfo] = useState([{ storage_id: '', file_name: '' }])
-  // const getInfoApi = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/slides';
+  const [storageInfo, setStorageInfo] = useState<StorageInfo[] | undefined>(undefined)
+  const getInfoApi = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/slides';
   const downloadApi = 'https://mhkkwfr9e9.execute-api.ap-northeast-1.amazonaws.com/api/slide_generator/download_slide';
 
   useEffect(() => {
-    setStorageInfo([{ storage_id: 'test', file_name: 'test' }, { storage_id: 'test2', file_name: 'test2' },])
-    // axios.get(getInfoApi, {
-    //   headers: {
-    //     token
-    //   },
-    // }).then(res => {
-    //   setStorageInfo(res.data);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    axios.get(getInfoApi, {
+      headers: {
+        token
+      },
+    }).then(res => {
+      setStorageInfo(res.data);
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, [token])
 
   const handleDownload = (e: React.MouseEvent<HTMLButtonElement>, storage_id: string) => {
@@ -33,7 +37,7 @@ export const DownloadSlide = () => {
         token
       },
     }).then(function (response) {
-      console.log(response);
+      console.log(response.data.download_url);
     })
       .catch(function (error) {
         console.log(error);
@@ -47,20 +51,24 @@ export const DownloadSlide = () => {
           ダウンロードしたいファイル名をクリックしてください
         </Typography>
         <Box className="flex flex-row space-x-4 space-y-4 flex-wrap">
-          {storageInfo.map((info) => (
-            <Button
-            key={info.storage_id}
-            onClick={(e) => handleDownload(e, info.storage_id)}
-            variant="contained"
-            color="primary"
-            startIcon={<DownloadIcon />}
-            className="normal-case text-white hover:bg-blue-700 hover:scale-105 transition-transform duration-300 rounded px-3 py-1.5 w-auto focus:outline-none focus:ring-0"
-          >
-            {info.file_name}
-          </Button>
-          ))}
-        </Box>
-      </Paper>
-    </Container>
+          {storageInfo && storageInfo.length > 0 ? (
+            storageInfo.map((info) => (
+              <Button
+                key={info.storage_id}
+                onClick={(e) => handleDownload(e, info.storage_id)}
+                variant="contained"
+                color="primary"
+                startIcon={<DownloadIcon />}
+                className="normal-case text-white hover:bg-blue-700 hover:scale-105 transition-transform duration-300 rounded px-3 py-1.5 w-auto focus:outline-none focus:ring-0"
+              >
+                {info.file_name}
+              </Button>
+            ))
+          ) : (
+            <p className="text-gray-500">作成されたデータはありません</p>
+          )}
+      </Box>
+    </Paper>
+    </Container >
   );
 }

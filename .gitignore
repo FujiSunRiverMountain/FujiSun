@@ -16,7 +16,8 @@ var/
 .installed.cfg
 *.egg
 __pycache__
-
+dynamodb_local_latest
+dynamodb_local_latest.zip
 # Serverless directories
 .serverless
 
