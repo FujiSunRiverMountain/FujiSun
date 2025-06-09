@@ -28,7 +28,6 @@ pip install -r requirements.txt
 5. other lib install
 ```
 pip install uvicorn
-pip install python-pptx
 ```
 
 # Lambda デプロイ用 ZIP 作成（シェルスクリプト作りたい）
