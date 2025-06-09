@@ -1,4 +1,4 @@
-import { Container, Box, TextField, Button, Typography, Paper, Snackbar, Alert, Backdrop, CircularProgress, SnackbarContent } from '@mui/material';
+import { Container, Box, TextField, Button, Typography, Paper, Snackbar, CircularProgress, SnackbarContent } from '@mui/material';
 import axios from "axios";
 import { useState } from 'react';
 import { tokenUseStore } from '../BaseLayout/zustand';
@@ -49,6 +49,7 @@ export const GenerateSlide = () => {
             name="name"
             label="ファイル名（拡張子なし）"
             value={name}
+            defaultValue={''}
             variant="outlined"
             margin="normal"
             onChange={(e) => setFileName(e.target.value)}
@@ -61,6 +62,7 @@ export const GenerateSlide = () => {
             name="info"
             label="要望内容"
             value={information}
+            defaultValue={''}
             variant="outlined"
             margin="normal"
             multiline
