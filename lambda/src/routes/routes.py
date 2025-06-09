@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Header
-from database.repository import create_and_update_information, get_information
+from database.personal_info_table import create_and_update_information, get_information
 from app.pptx import generate_slide
 from models.models import PersonalInfo, PresentationScene
 import json

@@ -1,7 +1,7 @@
 import os
 import requests
 from models.models import PersonalInfo, PresentationScene
-from database.repository import get_information
+from database.personal_info_table import get_information
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key={GEMINI_API_KEY}"
