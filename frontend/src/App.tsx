@@ -13,24 +13,26 @@ function App() {
     }
   }, [auth.isAuthenticated, auth.user, updateToken]);
 
-
-  if (auth.isLoading) {
-    return <div>Loading...</div>;
-  }
+  // 未認証ならOIDCリダイレクト
+  useEffect(() => {
+    if (!auth.isLoading && !auth.isAuthenticated) {
+      auth.signinRedirect();
+    }
+  }, [auth.isLoading, auth.isAuthenticated]);
 
   if (auth.error) {
     return <div>Encountering error... {auth.error.message}</div>;
+  }
+
+  if (auth.isLoading) {
+    return <div>Loading...</div>;
   }
 
   if (auth.isAuthenticated) {
     return <AppRouter />;
   }
 
-  return (
-    <div>
-      <button onClick={() => auth.signinRedirect()}>Sign in</button>
-    </div>
-  );
+  return null;
 }
 
-export default App
+export default App;
