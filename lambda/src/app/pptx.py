@@ -27,4 +27,4 @@ def generate_slide(presentation_scene: PresentationScene, user_id: str):
 def get_download_pptx_url(download_storage_id: DownloadStorageId, user_id: str):
   pptxs = get_pptx(user_id)
   pptx_file_name = [pptx.get("file_name") for pptx in pptxs if pptx.get("storage_id") == download_storage_id.storage_id][0]
-  return gen_presigned_url(f"{download_storage_id.storage_id}/{pptx_file_name}")
+  return {"download_url": gen_presigned_url(f"{download_storage_id.storage_id}/{pptx_file_name}")}
