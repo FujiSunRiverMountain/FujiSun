@@ -45,4 +45,3 @@ def get_pptx(user_id: str):
         content={"error": str(e), "details": e.response.get("Error", {})},
         status_code=500
       )
-  
