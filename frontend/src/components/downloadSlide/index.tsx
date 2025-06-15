@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import { tokenUseStore } from '../BaseLayout/zustand';
 import DownloadIcon from '@mui/icons-material/Download';
+import { downloadByPresignedUrl } from './s3download';
 
 type StorageInfo = {
   storage_id: string;
@@ -28,16 +29,17 @@ export const DownloadSlide = () => {
       });
   }, [token])
 
-  const handleDownload = (e: React.MouseEvent<HTMLButtonElement>, storage_id: string) => {
+  const handleDownload = (e: React.MouseEvent<HTMLButtonElement>, info: {storage_id: string, file_name: string}) => {
     e.preventDefault();
     axios.post(downloadApi, {
-      storage_id
+      storage_id: info.storage_id
     }, {
       headers: {
         token
       },
     }).then(function (response) {
       console.log(response.data.download_url);
+      downloadByPresignedUrl(response.data.download_url, info.file_name)
     })
       .catch(function (error) {
         console.log(error);
@@ -55,7 +57,7 @@ export const DownloadSlide = () => {
             storageInfo.map((info) => (
               <Button
                 key={info.storage_id}
-                onClick={(e) => handleDownload(e, info.storage_id)}
+                onClick={(e) => handleDownload(e, info)}
                 variant="contained"
                 color="primary"
                 startIcon={<DownloadIcon />}
