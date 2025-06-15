@@ -7,6 +7,9 @@ import App from './App.tsx'
 const cognitoAuthConfig = {
   authority: "https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_L1TI7Rkf2",
   client_id: "584mk52em2ruu20s3q6vthvlms",
+  // dev
+  // redirect_uri: "https://slidegenerator.jp",
+  // local
   redirect_uri: "http://localhost:5173",
   response_type: "code",
   scope: "phone openid email",
