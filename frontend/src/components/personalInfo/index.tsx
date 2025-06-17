@@ -40,7 +40,10 @@ export const PersonalInfo = () => {
   };
 
   return (
-    <Container >
+    <Container  sx={{
+      maxHeight: '100vh',
+      overflowY: 'auto',
+    }}>
       <Paper elevation={3} className='left-0 right-0 h-300 p-20 mt-20 rounded-md'>
         <Typography variant="h5" align="center" gutterBottom>
           自己情報入力

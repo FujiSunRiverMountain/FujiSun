@@ -36,7 +36,10 @@ export const GenerateSlide = () => {
   };
 
   return (
-    <Container >
+    <Container sx={{
+      maxHeight: '100vh',
+      overflowY: 'auto',
+    }}>
       <Paper elevation={3} className='left-0 right-0 h-300 p-20 mt-20 rounded-md'>
         <Typography variant="h5" align="center" gutterBottom>
           作成したいスライドのファイル名と要望を教えてください
@@ -55,7 +58,7 @@ export const GenerateSlide = () => {
             onChange={(e) => setFileName(e.target.value)}
           />
           <TextField
-            sx={{ "& .MuiInputBase-input": { height: 500 } }}
+            sx={{ "& .MuiInputBase-input": { height: 600 } }}
             fullWidth
             required
             id="info"
@@ -66,7 +69,7 @@ export const GenerateSlide = () => {
             variant="outlined"
             margin="normal"
             multiline
-            rows={20}
+            rows={15}
             onChange={(e) => setInfo(e.target.value)}
           />
           <Button
